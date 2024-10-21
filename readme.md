@@ -1,4 +1,4 @@
 # Plugins
-[*] Passwords
-[ ] BIP39
-[ ] OpenPGP
+- [x] Passwords
+- [ ] BIP39
+- [ ] OpenPGP
