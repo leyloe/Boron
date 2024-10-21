@@ -85,7 +85,13 @@ mod tests {
             149, 4, 226, 242, 7, 188, 125, 31, 215, 212, 134, 155, 207,
         ];
 
-        const OPTIONS: [Options; 2] = [Options::Lower, Options::Digits, Op];
+        const OPTIONS: [Options; 4] = [
+            Options::Lower,
+            Options::Digits,
+            Options::Special,
+            Options::Upper,
+        ];
+
         let boron_password = BoronPassword::init(&OPTIONS, 300);
 
         let password = boron_password.from(KEY).unwrap();
