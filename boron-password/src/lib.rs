@@ -37,7 +37,7 @@ impl BoronPassword {
         Self { char_list, len }
     }
     pub fn from(self, key: [u8; 32]) -> Result<Vec<u8>> {
-        let modulus = self.char_list.len() + 1;
+        let modulus = self.char_list.len();
         let mut key = key;
         let mut password = Vec::new();
         let mut count = 0;
@@ -80,7 +80,7 @@ mod tests {
         ];
 
         const OPTIONS: [Options; 2] = [Options::Lower, Options::Digits];
-        let boron_password = BoronPassword::init(&OPTIONS, 50);
+        let boron_password = BoronPassword::init(&OPTIONS, 300);
 
         let password = boron_password.from(KEY).unwrap();
 
