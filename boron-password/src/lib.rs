@@ -54,13 +54,13 @@ impl BoronPassword {
                 }
             }
 
-            if count >= self.len {
-                break;
-            }
-
             if count > 32 {
                 let mac = HmacSha256::new_from_slice(&key)?;
                 key = mac.finalize().into_bytes().into();
+            }
+
+            if count >= self.len {
+                break;
             }
         }
 
