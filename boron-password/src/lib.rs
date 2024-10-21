@@ -9,6 +9,7 @@ const UPPER: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const DIGITS: &[u8] = b"0123456789";
 const SPECIAL: &[u8] = b"#$%&@^`~";
 
+#[derive(PartialEq)]
 pub enum Options {
     Lower,
     Upper,
@@ -25,17 +26,22 @@ impl BoronPassword {
     pub fn init(options: &[Options], len: u32) -> Self {
         let mut char_list = Vec::new();
 
-        for option in options {
-            match option {
-                Options::Lower => char_list.extend_from_slice(LOWER),
-                Options::Upper => char_list.extend_from_slice(UPPER),
-                Options::Digits => char_list.extend_from_slice(DIGITS),
-                Options::Special => char_list.extend_from_slice(SPECIAL),
-            }
+        if options.contains(&Options::Lower) {
+            char_list.extend_from_slice(LOWER);
+        }
+        if options.contains(&Options::Upper) {
+            char_list.extend_from_slice(UPPER);
+        }
+        if options.contains(&Options::Digits) {
+            char_list.extend_from_slice(DIGITS);
+        }
+        if options.contains(&Options::Special) {
+            char_list.extend_from_slice(SPECIAL);
         }
 
         Self { char_list, len }
     }
+
     pub fn from(self, key: [u8; 32]) -> Result<Vec<u8>> {
         let modulus = self.char_list.len();
         let mut key = key;
@@ -79,7 +85,7 @@ mod tests {
             149, 4, 226, 242, 7, 188, 125, 31, 215, 212, 134, 155, 207,
         ];
 
-        const OPTIONS: [Options; 2] = [Options::Lower, Options::Digits];
+        const OPTIONS: [Options; 2] = [Options::Lower, Options::Digits, Op];
         let boron_password = BoronPassword::init(&OPTIONS, 300);
 
         let password = boron_password.from(KEY).unwrap();
