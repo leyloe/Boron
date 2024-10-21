@@ -1,0 +1,9 @@
+[package]
+name = "boron-password"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.90"
+hmac = "0.12.1"
+sha2 = "0.10.8"

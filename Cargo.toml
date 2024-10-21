@@ -1,0 +1,2 @@
+[workspace]
+members = ["boron", "boron-password"]
