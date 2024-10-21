@@ -34,8 +34,6 @@ impl BoronPassword {
             }
         }
 
-        println!("char_list len: {}", char_list.len());
-
         Self { char_list, len }
     }
     pub fn from(self, key: [u8; 32]) -> Result<Vec<u8>> {
