@@ -2,7 +2,7 @@
 Stateless password manager powered by Argon2 and Hmac-Sha256. The core program and all plugins are to be specified.
 
 ## Philosophy
-The plugin system for this password manager is to be as seamless as possible. In that all an additional plugin will do is add an extra way to encode your key. For example turning your 32-byte key into a BIP39 Mnemonic or a PGP key. From a GUI perspective when encodig your key to your desired format you will see a drop down, once you selected your desired format (plugin), a config may appear.
+The plugin system for this password manager is designed to be as seamless as possible. Each plugin simply adds an additional method for encoding your key. For instance, it could convert your 32-byte key into a BIP39 Mnemonic or a PGP key. From a GUI perspective, when encoding your key into a specific format, a drop-down menu will appear. After selecting the desired format (plugin), a configuration panel may appear based on the plugin’s requirements.
 
 A plugin can be broken down into 2 parts:
 - The config
