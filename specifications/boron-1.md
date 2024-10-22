@@ -4,7 +4,7 @@
 | Symbol | Meaning            |
 |--------|--------------------|
 | P      | Parent key         |
-| K      | Result key         |
+| K      | Resulting key      |
 | I      | Index              |
 | \|     | Concatenate values |
 ### Argon2id parameters
