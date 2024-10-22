@@ -4,6 +4,7 @@
 | Symbol | Meaning            |
 |--------|--------------------|
 | P      | Parent key         |
+| K      | key                |
 | I      | Index              |
 | \|     | Concatenate values |
 ### Argon2id parameters
@@ -15,4 +16,4 @@
 ### Password | Salt &rarr; Master Key
 todo
 ### Parent key &rarr; Child key
-The function DeriveChild(P, I) &rarr; 
+The function DeriveChild(P, I) &rarr; K
