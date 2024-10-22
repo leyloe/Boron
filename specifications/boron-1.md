@@ -1,5 +1,5 @@
 # Boron-1 Specification: Key Derivation
-## Key Definitions
+### Key Definitions
 All keys will be 32-byte sequences, ensuring uniformity across the system.
 
 | Symbol | Meaning                        |
@@ -12,7 +12,7 @@ All keys will be 32-byte sequences, ensuring uniformity across the system.
 | U      | Username (optional)            |
 | \|     | Concatenate                    |
 
-## Argon2id Parameters
+### Argon2id Parameters
 
 | Parameter    | Value         |
 |--------------|---------------|
