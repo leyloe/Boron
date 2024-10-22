@@ -16,4 +16,4 @@
 ### Password | Salt &rarr; Master Key
 todo
 ### Parent key &rarr; Child key
-The function DeriveChild(P, I) &rarr; K
+The function defined as DeriveChild(P, I) &rarr; K where K is derived from Hmac-Sha256 with P as the key and I as the message.
