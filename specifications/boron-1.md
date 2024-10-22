@@ -9,7 +9,7 @@
 #### Definitions: Lets assume the following
 P = parent key \
 I = index \
-| = concatenate values \
+| = concatenate values
 #### Password | Salt &rarr; Master Key
 todo
 #### Parent key &rarr; Child key
