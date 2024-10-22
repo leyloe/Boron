@@ -2,6 +2,7 @@
 ## Specification: Key derivation
 ### Definitions: Lets assume the following
 - Any kind of key will always be a 32-byte sequence.
+
 | Symbol | Meaning            |
 |--------|--------------------|
 | P      | Parent key         |
