@@ -8,37 +8,40 @@ const UPPER: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const DIGITS: &[u8] = b"0123456789";
 const SPECIAL: &[u8] = b"#$%&@^`~";
 
-#[derive(PartialEq)]
-pub enum Options {
-    Lower,
-    Upper,
-    Digits,
-    Special,
+pub struct Config {
+    len: u32,
+    lower: bool,
+    upper: bool,
+    digits: bool,
+    special: bool,
 }
 
-pub struct BoronPassword {
+pub struct Password {
     char_list: Vec<u8>,
     len: u32,
 }
 
-impl BoronPassword {
-    pub fn init(options: &[Options], len: u32) -> Self {
+impl Password {
+    pub fn init(config: Config) -> Self {
         let mut char_list = Vec::new();
 
-        if options.contains(&Options::Lower) {
+        if config.lower {
             char_list.extend_from_slice(LOWER);
         }
-        if options.contains(&Options::Upper) {
+        if config.upper {
             char_list.extend_from_slice(UPPER);
         }
-        if options.contains(&Options::Digits) {
+        if config.digits {
             char_list.extend_from_slice(DIGITS);
         }
-        if options.contains(&Options::Special) {
+        if config.special {
             char_list.extend_from_slice(SPECIAL);
         }
 
-        Self { char_list, len }
+        Self {
+            char_list,
+            len: config.len,
+        }
     }
 
     pub fn generate_from(self, key: [u8; 32]) -> Result<Vec<u8>> {
@@ -47,11 +50,11 @@ impl BoronPassword {
 
         let hk = Hkdf::<Sha256>::new(None, &key);
 
-        let mut okm = vec![0u8; self.len.try_into()?];
+        let mut buf = vec![0u8; self.len.try_into()?];
 
-        hk.expand(b"boron", &mut okm).unwrap();
+        hk.expand(b"boron", &mut buf).unwrap();
 
-        for i in &okm {
+        for i in &buf {
             let char_index = *i as usize % modulus;
             password.push(self.char_list[char_index]);
         }
@@ -71,14 +74,15 @@ mod tests {
             149, 4, 226, 32, 7, 188, 125, 31, 215, 212, 100, 155, 207,
         ];
 
-        const OPTIONS: [Options; 4] = [
-            Options::Lower,
-            Options::Digits,
-            Options::Special,
-            Options::Upper,
-        ];
+        const CONFIG: Config = Config {
+            len: 12,
+            lower: true,
+            upper: true,
+            digits: true,
+            special: true,
+        };
 
-        let boron_password = BoronPassword::init(&OPTIONS, 12);
+        let boron_password = Password::init(CONFIG);
 
         let password = boron_password.generate_from(KEY).unwrap();
 
