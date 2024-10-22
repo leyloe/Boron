@@ -1,9 +1,11 @@
 ### Boron-1
 ### Specification: Key derivation
 #### Definitions: Lets assume the following
-P = parent key \
-I = index \
-| = concatenate values
+| Symbol | Meaning            |
+|--------|--------------------|
+| P      | Parent key         |
+| I      | Index              |
+| \|     | Concatenate values |
 #### Argon2id parameters
 | Name          | Value         |
 | ------------- | ------------- |
