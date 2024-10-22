@@ -1,11 +1,11 @@
 ### Boron-1
-### Argon2id parameters
+### Specification: Key derivation
+#### Argon2id parameters
 | Name          | Value         |
 | ------------- | ------------- |
 | Memory (KB)   | 128 * 1024    |
 | Iterations    | 4             |
 | Threads       | 4             |
-### Specification: Key derivation
 #### Definitions: Lets assume the following
 P = parent key \
 I = index \
