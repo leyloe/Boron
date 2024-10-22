@@ -1,4 +1,4 @@
-# Boron-1
+### Boron-1
 ### Argon2id parameters
 | Name          | Value         |
 | ------------- | ------------- |
