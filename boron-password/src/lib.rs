@@ -50,7 +50,7 @@ impl BoronPassword {
 
         let mut okm = vec![0u8; self.len.try_into()?];
 
-        hk.expand(b"boron2", &mut okm).unwrap();
+        hk.expand(b"boron", &mut okm).unwrap();
 
         loop {
             for i in &okm {
