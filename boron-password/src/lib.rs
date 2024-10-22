@@ -16,12 +16,12 @@ pub struct Config {
     special: bool,
 }
 
-pub struct Password {
+pub struct Output {
     char_list: Vec<u8>,
     len: u32,
 }
 
-impl Password {
+impl Output {
     pub fn init(config: Config) -> Self {
         let mut char_list = Vec::new();
 
@@ -82,7 +82,7 @@ mod tests {
             special: true,
         };
 
-        let boron_password = Password::init(CONFIG);
+        let boron_password = Output::init(CONFIG);
 
         let password = boron_password.generate_from(KEY).unwrap();
 
