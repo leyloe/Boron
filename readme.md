@@ -8,7 +8,7 @@ A plugin can be broken down into 2 parts:
 - The config
 - The encoded output
 
-
+The config might be needed if you're working with something like passwords, you may need to select your length, what characters to include, etc.
 
 ## Plugins
 - [x] Passwords
