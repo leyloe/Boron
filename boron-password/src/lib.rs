@@ -80,7 +80,7 @@ mod tests {
 
         let boron_password = BoronPassword::init(&OPTIONS, 12);
 
-        let password = boron_password.from(KEY).unwrap();
+        let password = boron_password.generate_from(KEY).unwrap();
 
         println!("password: {}", String::from_utf8(password).unwrap());
     }
