@@ -5,3 +5,7 @@ Stateless password manager powered by Argon2id and Hmac-Sha256. The core program
 - [x] Passwords
 - [ ] BIP39
 - [ ] OpenPGP
+
+## Todo
+- [ ] CLI
+- [ ] GUI
