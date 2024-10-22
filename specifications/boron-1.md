@@ -6,5 +6,11 @@
 | Iterations    | 4             |
 | Threads       | 4             |
 ### Specification: Key derivation
+#### Definitions: Lets assume the following
+P = parent key
+I = index
+| = concatenate values
+#### Password | Salt &rarr; Master Key
+todo
 #### Parent key &rarr; Child key
-blah
+The function DeriveChild(P, I) &rarr; 
