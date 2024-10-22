@@ -10,9 +10,9 @@ A plugin can be broken down into 2 parts:
 
 The config might be needed if you're working with something like passwords, you may need to specify your length, what characters to include, etc. However, the goal is to provide the best configuration defaults as possible so you don't have to remember too much.
 
-In addition for added convenience you may have the option to backup and import your entries (label + username) so you don't have to input them every time. However your entries password will never be stored (not even encrypted), so you still need your master password. But you can have the option of encrypting the entries with a password.
+In addition for added convenience you may have the option to backup and import your entries (label + username) so you don't have to input them every time. However your entries secrets will never be stored (not even encrypted), so you still need your master password. But you can have the option of encrypting the entries with a password.
 
-As a reminder entries only consist of a label (website or service) + an optional username. The passwords will only be derived after you have inputted your master password.
+As a reminder entries only consist of a label (website or service) + an optional username. The secrets will only be derived after you have inputted your master password.
 
 ## Plugins
 - [x] Passwords
