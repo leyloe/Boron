@@ -1,5 +1,5 @@
-### Boron-1
-### Specification: Key derivation
+# Boron-1
+## Specification: Key derivation
 #### Definitions: Lets assume the following
 | Symbol | Meaning            |
 |--------|--------------------|
