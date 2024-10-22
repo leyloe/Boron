@@ -1,5 +1,5 @@
 # Boron
-Stateless password manager powered by Argon2 and Hmac-Sha256. The core program and all plugins are to be specified.
+A stateless password manager powered by Argon2 and HMAC-SHA256. The core implementation and all plugins are to have a specification.
 
 ## Philosophy
 The plugin system for this password manager is designed to be as seamless as possible. Each plugin simply adds an additional method for encoding your key. For instance, it could convert your 32-byte key into a BIP39 Mnemonic or a PGP key. From a GUI perspective, when encoding your key into a specific format, a drop-down menu will appear. After selecting the desired format (plugin), a configuration panel may appear based on the plugin’s requirements.
