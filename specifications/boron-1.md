@@ -42,7 +42,7 @@ All keys will be 32-byte sequences, ensuring uniformity across the system.
 2. **Process**: HMAC-SHA256 is used, with the parent key (P) as the HMAC key and the concatenation of the label and username (L | U) as the message.
 3. **Output**: The resulting 32-byte key (K).
 
-## Key Derivation Paths
+### Key Derivation Paths
 The key derivation system supports hierarchical key derivation using paths. 
 For example:
 - **Simple path**: `DeriveChild(DeriveChild(DeriveChild(P, 3), 2), 5)` produces a key for the path `P/3/2/5`.
