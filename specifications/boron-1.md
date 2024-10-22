@@ -21,4 +21,4 @@ With S being an optional value, it's default will be a 32-byte sequence of 0's. 
 ### Parent key &rarr; Child key
 The function DeriveChild(P, I) &rarr; K takes a parent key P and an index I as inputs. It uses HMAC-SHA256, where P is the key and I is the message, to produce a derived child key K.
 ### The key tree
-This part is simple, as an example do DeriveChild(DeriveChild(DeriveChild(P,3),2),5) for P/3/2/5.
+This part is simple, as an example just do DeriveChild(DeriveChild(DeriveChild(P,3),2),5) for P/3/2/5 or likewise for your desired path.
