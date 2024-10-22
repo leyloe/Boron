@@ -1,8 +1,7 @@
 use anyhow::Result;
-use hmac::{Hmac, Mac};
-use sha2::Sha256;
 
-type HmacSha256 = Hmac<Sha256>;
+use hkdf::Hkdf;
+use sha2::Sha256;
 
 const LOWER: &[u8] = b"abcdefghijklmnopqrstuvwxyz";
 const UPPER: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -44,13 +43,18 @@ impl BoronPassword {
 
     pub fn from(self, key: [u8; 32]) -> Result<Vec<u8>> {
         let modulus = self.char_list.len();
-        let mut key = key;
         let mut password = Vec::new();
         let mut count = 0;
 
+        let hk = Hkdf::<Sha256>::new(None, &key);
+
+        let mut okm = vec![0u8; self.len.try_into()?];
+
+        hk.expand(b"boron", &mut okm).unwrap();
+
         loop {
-            for i in key {
-                let char_index = i as usize % modulus;
+            for i in &okm {
+                let char_index = *i as usize % modulus;
                 password.push(self.char_list[char_index]);
 
                 count += 1;
@@ -62,11 +66,6 @@ impl BoronPassword {
 
             if count >= self.len {
                 break;
-            }
-
-            if count >= 32 {
-                let mac = HmacSha256::new_from_slice(&key)?;
-                key = mac.finalize().into_bytes().into();
             }
         }
 
@@ -92,7 +91,7 @@ mod tests {
             Options::Upper,
         ];
 
-        let boron_password = BoronPassword::init(&OPTIONS, 300);
+        let boron_password = BoronPassword::init(&OPTIONS, 6);
 
         let password = boron_password.from(KEY).unwrap();
 
