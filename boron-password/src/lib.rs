@@ -41,7 +41,7 @@ impl BoronPassword {
         Self { char_list, len }
     }
 
-    pub fn from(self, key: [u8; 32]) -> Result<Vec<u8>> {
+    pub fn generate_from(self, key: [u8; 32]) -> Result<Vec<u8>> {
         let modulus = self.char_list.len();
         let mut password = Vec::new();
 
