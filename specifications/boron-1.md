@@ -11,7 +11,6 @@
 | S      | Salt               |
 | L      | Label              |
 | U      | Username           |
-| E      | Resulting entry    |
 | \|     | Concatenate values |
 ### Argon2id parameters
 | Name          | Value         |
@@ -24,6 +23,7 @@ With (S) being an optional value, it's default will be a 32-byte sequence of 0's
 ### Parent key &rarr; Child key
 The function DeriveChild(P, I) &rarr; K takes a parent key (P) and an index (I) as function arguments, returning a key (K). It uses HMAC-SHA256, where (P) is the key and (I) is the message, to produce a derived child key (K). (I) is 32 unsigned and big endian encoded.
 ### Key &rarr; Entry
-The function GetEntry(K, L, U) -> K takes a resulting key (K), a label (L), and a username (U) as function arguments, returning a new key (E). It uses HMAC-SHA256, where (K) is the key and (L | U) is the message, to produce a key (E).
+The function GetEntry(P, L, U) -> K takes a key (P), a label (L), and a username (U) as function arguments, returning a new key (K). It uses HMAC-SHA256, where (K) is the key and (L | U) is the message, to produce a key (K). Username (U) is optional.
 ### The key tree
-This part is simple, as an example just do DeriveChild(DeriveChild(DeriveChild(P,3),2),5) for P/3/2/5 or likewise for your desired path.
+- This part is simple, as an example just do DeriveChild(DeriveChild(DeriveChild(P,3),2),5) for P/3/2/5 or likewise for your desired path.
+- Your path can also include entries, for example DeriveChild(DeriveChild(GetEntry(P,L,U),2),5) creates P/labelusername/2/5
