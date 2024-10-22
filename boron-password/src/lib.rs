@@ -50,7 +50,7 @@ impl BoronPassword {
 
         let mut okm = vec![0u8; self.len.try_into()?];
 
-        hk.expand(b"boron", &mut okm).unwrap();
+        hk.expand(b"boron2", &mut okm).unwrap();
 
         loop {
             for i in &okm {
@@ -81,7 +81,7 @@ mod tests {
     fn test() {
         const KEY: [u8; 32] = [
             69, 195, 208, 45, 141, 188, 69, 115, 231, 103, 78, 14, 179, 219, 226, 24, 113, 37, 46,
-            149, 4, 226, 242, 7, 188, 125, 31, 215, 212, 134, 155, 207,
+            149, 4, 226, 32, 7, 188, 125, 31, 215, 212, 100, 155, 207,
         ];
 
         const OPTIONS: [Options; 4] = [
@@ -91,7 +91,7 @@ mod tests {
             Options::Upper,
         ];
 
-        let boron_password = BoronPassword::init(&OPTIONS, 6);
+        let boron_password = BoronPassword::init(&OPTIONS, 12);
 
         let password = boron_password.from(KEY).unwrap();
 
