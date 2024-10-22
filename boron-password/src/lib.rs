@@ -44,7 +44,6 @@ impl BoronPassword {
     pub fn from(self, key: [u8; 32]) -> Result<Vec<u8>> {
         let modulus = self.char_list.len();
         let mut password = Vec::new();
-        let mut count = 0;
 
         let hk = Hkdf::<Sha256>::new(None, &key);
 
@@ -52,21 +51,9 @@ impl BoronPassword {
 
         hk.expand(b"boron", &mut okm).unwrap();
 
-        loop {
-            for i in &okm {
-                let char_index = *i as usize % modulus;
-                password.push(self.char_list[char_index]);
-
-                count += 1;
-
-                if count >= self.len {
-                    break;
-                }
-            }
-
-            if count >= self.len {
-                break;
-            }
+        for i in &okm {
+            let char_index = *i as usize % modulus;
+            password.push(self.char_list[char_index]);
         }
 
         Ok(password)
