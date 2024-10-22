@@ -18,4 +18,4 @@ todo
 ### Parent key &rarr; Child key
 The function defined as DeriveChild(P, I) &rarr; K where K is derived from Hmac-Sha256 with P as the key and I as the message.
 
-The function DeriveChild(P, I) &rarr; K takes a parent key PP and an index II as inputs.
+The function DeriveChild(P, I) &rarr; K takes a parent key P and an index I as inputs.
