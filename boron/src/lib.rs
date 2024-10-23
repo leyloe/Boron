@@ -11,6 +11,14 @@ pub struct Boron2 {
     pub master_key: [u8; 32],
 }
 
+pub enum KeyPath<'a> {
+    Child(u32),
+    Entry {
+        label: &'a [u8],
+        username: Option<&'a [u8]>,
+    },
+}
+
 impl Boron2 {
     pub fn init_master(password: &[u8], salt: Option<&[u8; 32]>) -> Result<Self> {
         let salt = salt.unwrap_or(&[0u8; 32]);
@@ -38,11 +46,14 @@ impl Boron2 {
         Ok(result.into_bytes().into())
     }
 
-    pub fn derive_key(root_key: [u8; 32], path: &[u32]) -> Result<[u8; 32]> {
+    pub fn derive_key(root_key: [u8; 32], path: &[KeyPath]) -> Result<[u8; 32]> {
         let mut key = root_key;
 
-        for i in path {
-            key = Self::derive_child(key, *i)?;
+        for segment in path {
+            key = match segment {
+                KeyPath::Child(idx) => Self::derive_child(key, *idx)?,
+                KeyPath::Entry { label, username } => Self::get_entry(key, label, *username)?,
+            };
         }
 
         Ok(key)
@@ -62,14 +73,22 @@ impl Boron2 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::KeyPath::Child;
+    use crate::KeyPath::Entry;
 
     #[test]
     fn test() -> Result<()> {
-        const PATH: [u32; 4] = [0, 0, 0, 14];
+        const PATH: &[KeyPath] = &[
+            Entry {
+                label: b"btc",
+                username: None,
+            },
+            Child(0),
+        ];
 
         let boron = Boron2::init_master("password".as_bytes(), None)?;
 
-        let key = Boron2::derive_key(boron.master_key, &PATH)?;
+        let key = Boron2::derive_key(boron.master_key, PATH)?;
 
         let entry = Boron2::get_entry(key, b"xmpp", None)?;
 

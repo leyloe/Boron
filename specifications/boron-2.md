@@ -1,1 +1,1 @@
-# Boron-2 Specification: Password Plugin
+# Boron-2 Specification: Plugins Structure
