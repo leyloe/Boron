@@ -49,3 +49,6 @@ For example:
 - **Path with an entry**: `DeriveChild(DeriveChild(GetEntry(P, L, U), 2), 5)` produces a key for the path `P/labelusername/2/5`.
 
 This structure provides flexibility for generating unique keys across various use cases, leveraging Argon2id for secure master key generation and HMAC-SHA256 for efficient child and entry key derivation.
+
+### Key Encoding and Format Flexibility
+Once a key is derived using any of the aforementioned methods (either from an entry or a path), you are free to convert or encode the key into any format required by your system. This is made possible through the use of Boron plugins or any other custom encoding schemes. E.g. creating a password.
