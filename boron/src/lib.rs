@@ -34,12 +34,13 @@ impl Boron2 {
     }
 
     pub fn get_entry(key: [u8; 32], label: &[u8], username: Option<&[u8]>) -> Result<[u8; 32]> {
-        let username = username.unwrap_or(b"");
-
         let mut mac = HmacSha256::new_from_slice(&key)?;
 
         mac.update(label);
-        mac.update(username);
+
+        if let Some(username) = username {
+            mac.update(username);
+        }
 
         let result = mac.finalize();
 
