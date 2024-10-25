@@ -16,6 +16,18 @@ pub struct Config {
     special: bool,
 }
 
+impl Default for Config {
+    fn default() -> Self {
+        Self {
+            len: 12,
+            lower: true,
+            upper: true,
+            digits: true,
+            special: true,
+        }
+    }
+}
+
 pub struct Output {
     char_list: Vec<u8>,
     len: u32,
@@ -74,15 +86,9 @@ mod tests {
             149, 4, 226, 32, 7, 188, 125, 31, 215, 212, 100, 155, 207,
         ];
 
-        const CONFIG: Config = Config {
-            len: 12,
-            lower: true,
-            upper: true,
-            digits: true,
-            special: true,
-        };
+        let config: Config = Config::default();
 
-        let boron_password = Output::init(CONFIG);
+        let boron_password = Output::init(config);
 
         let password = boron_password.generate_from(KEY).unwrap();
 
